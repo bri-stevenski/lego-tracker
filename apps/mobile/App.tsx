@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import Constants from 'expo-constants';
-import { findByBarcode, setConfig, type LegoCatalogItem } from '@lego-tracker/core';
+import { findByBarcode, setConfig, type LegoCatalogItem } from '@anti-kragle/core';
 
 const { rebrickableApiKey, supabaseUrl, supabaseAnonKey } = Constants.expoConfig?.extra ?? {};
 

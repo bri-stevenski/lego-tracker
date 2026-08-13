@@ -1,12 +1,12 @@
-export interface LegoTrackerConfig {
+export interface AntiKragleConfig {
   rebrickableApiKey?: string;
   supabaseUrl?: string;
   supabaseAnonKey?: string;
 }
 
-let currentConfig: LegoTrackerConfig = {};
+let currentConfig: AntiKragleConfig = {};
 
-export function setConfig(config: Partial<LegoTrackerConfig>) {
+export function setConfig(config: Partial<AntiKragleConfig>) {
   if (config.rebrickableApiKey !== undefined) {
     if (typeof config.rebrickableApiKey !== 'string' || config.rebrickableApiKey.trim() === '') {
       throw new Error('Invalid rebrickableApiKey: must be a non-empty string');
@@ -28,7 +28,7 @@ export function setConfig(config: Partial<LegoTrackerConfig>) {
   currentConfig = { ...currentConfig, ...config };
 }
 
-export function getConfig(): LegoTrackerConfig {
+export function getConfig(): AntiKragleConfig {
   return { ...currentConfig };
 }
 

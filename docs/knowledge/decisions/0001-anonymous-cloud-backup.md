@@ -13,7 +13,7 @@ Accepted — 2026-07-20
 
 ## Context
 
-Brick Ledger stored the collection (with valuable provenance metadata) only in
+Anti-Kragle stored the collection (with valuable provenance metadata) only in
 `localStorage`. The cloud-sync path was dead: `loadCollectionFromCloud` /
 `syncCollectionToCloud` early-returned on every call because there was no auth UI and
 therefore no authenticated session. Data was unprotected against local storage loss, and

@@ -1,10 +1,10 @@
 ---
-name: lego-tracker
+name: anti-kragle
 last_updated: "2026-07-20"
 version: 1
 ---
 
-# lego-tracker Strategy
+# anti-kragle Strategy
 
 ## Target problem
 

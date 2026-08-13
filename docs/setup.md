@@ -1,6 +1,6 @@
 # Setup Guide
 
-This guide covers local development, production build verification, and the browser requirements for Brick Ledger.
+This guide covers local development, production build verification, and the browser requirements for Anti-Kragle.
 
 ## Requirements
 

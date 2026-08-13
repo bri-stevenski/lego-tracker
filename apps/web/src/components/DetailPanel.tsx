@@ -15,7 +15,7 @@ import {
   itemTypeLabels,
   qualityLabels,
   statusLabels,
-} from '@lego-tracker/core';
+} from '@anti-kragle/core';
 
 function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);

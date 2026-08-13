@@ -7,7 +7,7 @@
 # appearing under the wrong site name, this file will not fix it.
 
 [build]
-  # Run from the repo root: the web app imports @lego-tracker/core via a
+  # Run from the repo root: the web app imports @anti-kragle/core via a
   # workspace alias, so building inside apps/web alone would miss the workspace.
   command = "npm run web:build"
 

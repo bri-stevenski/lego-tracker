@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { ItemList } from './ItemList';
-import type { OwnedLegoItem, MissingSetPart } from '@lego-tracker/core';
+import type { OwnedLegoItem, MissingSetPart } from '@anti-kragle/core';
 
 function makeOwned(id: string, missingPartsList: MissingSetPart[] = []): OwnedLegoItem {
   return {

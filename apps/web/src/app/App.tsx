@@ -31,7 +31,7 @@ import {
   summarizeCollection,
   toggleMissingPart,
   upsertOwnedItem,
-} from '@lego-tracker/core';
+} from '@anti-kragle/core';
 import { loadCollection, saveCollection } from '../services/storage';
 import { enqueueMutation } from '../services/syncQueue';
 import { BarcodeScanner } from '../components/BarcodeScanner';
@@ -257,7 +257,7 @@ export function App() {
             <Box size={24} />
           </div>
           <div>
-            <h1>Brick Ledger</h1>
+            <h1>Anti-Kragle</h1>
             <p>Collection tracker</p>
           </div>
         </div>

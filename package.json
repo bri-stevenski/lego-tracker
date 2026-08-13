@@ -1,5 +1,5 @@
 {
-  "name": "lego-tracker-monorepo",
+  "name": "anti-kragle-monorepo",
   "private": true,
   "workspaces": [
     "apps/*",

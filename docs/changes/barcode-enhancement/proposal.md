@@ -2,7 +2,7 @@
 
 ## Context
 
-Currently, Brick Ledger only supports barcode lookup for a small set of hardcoded items in `seedCatalog`. Users expect the app to recognize any LEGO set barcode by querying an external database like Rebrickable.
+Currently, Anti-Kragle only supports barcode lookup for a small set of hardcoded items in `seedCatalog`. Users expect the app to recognize any LEGO set barcode by querying an external database like Rebrickable.
 
 ## Requirements
 

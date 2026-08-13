@@ -1,8 +1,8 @@
-# lego-tracker Knowledge Map
+# anti-kragle Knowledge Map
 
 ## Project Overview
 
-**Brick Ledger** (lego-tracker) is a local-first LEGO collection tracker. It allows users to search a seeded LEGO catalog, manage their collection and wishlist, and track item-level details like build status, condition, and display location. The project is architected with a portable domain model to support a future iOS client.
+**Anti-Kragle** (anti-kragle) is a local-first LEGO collection tracker. It allows users to search a seeded LEGO catalog, manage their collection and wishlist, and track item-level details like build status, condition, and display location. The project is architected with a portable domain model to support a future iOS client.
 
 ## Repository Structure
 

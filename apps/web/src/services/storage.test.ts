@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { loadCollection, saveCollection, storageKey } from './storage';
-import { createOwnedItem } from '@lego-tracker/core';
-import type { LegoCatalogItem, OwnedLegoItem } from '@lego-tracker/core';
+import { createOwnedItem } from '@anti-kragle/core';
+import type { LegoCatalogItem, OwnedLegoItem } from '@anti-kragle/core';
 
 const catalogItem: LegoCatalogItem = {
   id: 'set-21318', type: 'set', number: '21318',
@@ -24,6 +24,17 @@ const baseItem: OwnedLegoItem = {
 describe('storage service', () => {
   beforeEach(() => {
     localStorage.clear();
+  });
+
+  // The product was renamed "Brick Ledger" -> "Anti-Kragle", but this key was
+  // deliberately NOT renamed: it addresses collections already sitting in real
+  // browsers. Rewriting it orphans every existing user's data with no error and
+  // no failing test -- every other case here binds to the symbol, so a global
+  // find-and-replace would sail through green. This is the only assertion that
+  // stands between a rename sweep and silent data loss. Change it only
+  // alongside a migration that reads the old key.
+  it('pins the persisted key to its legacy value across product renames', () => {
+    expect(storageKey).toBe('brick-ledger.collection.v1');
   });
 
   describe('loadCollection', () => {

@@ -1,6 +1,6 @@
 // apps/web/src/hooks/useSetParts.ts
 import { useState, useEffect } from 'react';
-import { type LegoCatalogItem, type SetPart, getOrFetchSetParts } from '@lego-tracker/core';
+import { type LegoCatalogItem, type SetPart, getOrFetchSetParts } from '@anti-kragle/core';
 
 export function useSetParts(item: LegoCatalogItem | undefined): {
   parts: SetPart[];

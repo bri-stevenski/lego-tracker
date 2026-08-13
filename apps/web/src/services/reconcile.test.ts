@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-vi.mock('@lego-tracker/core', () => ({
+vi.mock('@anti-kragle/core', () => ({
   loadCollectionFromCloud: vi.fn(),
   reconcileCollection: vi.fn((_local, items) => items),
   syncCollectionToCloud: vi.fn().mockResolvedValue(undefined),
@@ -11,8 +11,8 @@ vi.mock('./storage', () => ({
   saveCollection: vi.fn(),
 }));
 
-import { loadCollectionFromCloud, syncCollectionToCloud } from '@lego-tracker/core';
-import type { OwnedLegoItem, SyncQueueEntry } from '@lego-tracker/core';
+import { loadCollectionFromCloud, syncCollectionToCloud } from '@anti-kragle/core';
+import type { OwnedLegoItem, SyncQueueEntry } from '@anti-kragle/core';
 import { reconcile } from './reconcile';
 import { enqueueMutation, loadSyncQueue, saveSyncQueue } from './syncQueue';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trash2 } from 'lucide-react';
-import { type MissingSetPart, type SetPart, partsToCSV, partsToBSX, partsToLDR, downloadBlob } from '@lego-tracker/core';
+import { type MissingSetPart, type SetPart, partsToCSV, partsToBSX, partsToLDR, downloadBlob } from '@anti-kragle/core';
 
 export function MissingPartsList({
   parts,

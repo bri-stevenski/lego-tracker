@@ -1,5 +1,5 @@
 import React from 'react';
-import { type LegoCatalogItem, type SetPart, partsToCSV, partsToBSX, downloadBlob } from '@lego-tracker/core';
+import { type LegoCatalogItem, type SetPart, partsToCSV, partsToBSX, downloadBlob } from '@anti-kragle/core';
 import { useSetParts } from '../hooks/useSetParts';
 
 export function PartsList({

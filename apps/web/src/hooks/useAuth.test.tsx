@@ -2,14 +2,14 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, waitFor, act } from '@testing-library/react';
 import React from 'react';
 
-vi.mock('@lego-tracker/core', () => ({
+vi.mock('@anti-kragle/core', () => ({
   ensureAnonymousSession: vi.fn(),
   getSessionSnapshot: vi.fn(),
   linkEmailIdentity: vi.fn(),
   onSessionChange: vi.fn(),
 }));
 
-import { ensureAnonymousSession, getSessionSnapshot, onSessionChange } from '@lego-tracker/core';
+import { ensureAnonymousSession, getSessionSnapshot, onSessionChange } from '@anti-kragle/core';
 import { useAuth } from './useAuth';
 
 const mockEnsure = vi.mocked(ensureAnonymousSession);

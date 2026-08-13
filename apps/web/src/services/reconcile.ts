@@ -1,4 +1,4 @@
-import { loadCollectionFromCloud, reconcileCollection, syncCollectionToCloud } from '@lego-tracker/core';
+import { loadCollectionFromCloud, reconcileCollection, syncCollectionToCloud } from '@anti-kragle/core';
 import { loadCollection, saveCollection } from './storage';
 import { loadSyncQueue, removeSyncedEntries } from './syncQueue';
 

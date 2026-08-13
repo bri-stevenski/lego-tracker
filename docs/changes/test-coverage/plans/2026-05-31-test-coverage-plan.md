@@ -908,7 +908,7 @@ tests can run.
    ```typescript
    import { describe, it, expect, beforeEach } from 'vitest';
    import { loadCollection, saveCollection } from './storage';
-   import type { OwnedLegoItem } from '@lego-tracker/core';
+   import type { OwnedLegoItem } from '@anti-kragle/core';
 
    const baseItem: OwnedLegoItem = {
      id: 'set-10305', type: 'set', number: '10305',

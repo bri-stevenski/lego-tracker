@@ -14,7 +14,7 @@
 
 ## Overview and Goals
 
-Make Oracle's four AI test personas available inside lego-tracker's Claude Code
+Make Oracle's four AI test personas available inside anti-kragle's Claude Code
 environment. Any team member should be able to discover and use them without
 reading Oracle's upstream README.
 
@@ -105,7 +105,7 @@ covering both Vitest (core) and Playwright (web) targets.
 
 ## Success Criteria
 
-1. Running `/plugin install oracle` in a lego-tracker Claude Code session
+1. Running `/plugin install oracle` in a anti-kragle Claude Code session
    completes without error.
 2. All four Oracle personas are invocable by name in Claude Code.
 3. `oracle-test-author` generates a valid Vitest test for a domain function

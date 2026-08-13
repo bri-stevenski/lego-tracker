@@ -27,7 +27,7 @@ Deno.serve(async (req) => {
 
   try {
     const res = await fetch(legoUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BrickLedger/1.0)' },
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AntiKragle/1.0)' },
     });
 
     if (res.ok) {

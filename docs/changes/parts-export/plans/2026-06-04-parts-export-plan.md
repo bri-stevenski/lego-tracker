@@ -198,7 +198,7 @@ git commit -m "feat(parts): partsToCSV and partsToBSX export functions"
 At the top of `apps/web/src/components/PartsList.tsx`, add to the existing import:
 
 ```ts
-import { type LegoCatalogItem, type SetPart, partsToCSV, partsToBSX, downloadBlob } from '@lego-tracker/core';
+import { type LegoCatalogItem, type SetPart, partsToCSV, partsToBSX, downloadBlob } from '@anti-kragle/core';
 ```
 
 - [ ] **Step 2: Replace the parts-list section with export-wired version**

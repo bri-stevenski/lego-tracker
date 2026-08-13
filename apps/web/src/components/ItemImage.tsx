@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, PersonStanding, Puzzle } from 'lucide-react';
-import type { LegoItemType } from '@lego-tracker/core';
+import type { LegoItemType } from '@anti-kragle/core';
 
 const fallbackIcons: Record<LegoItemType, typeof Box> = {
   set: Box,

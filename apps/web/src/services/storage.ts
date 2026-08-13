@@ -1,4 +1,4 @@
-import type { OwnedLegoItem } from '@lego-tracker/core';
+import type { OwnedLegoItem } from '@anti-kragle/core';
 
 // Exported so tests bind to the SUT's key rather than duplicating the literal.
 // D8 of the provenance spec bumps this to .v2; with the literal duplicated in
