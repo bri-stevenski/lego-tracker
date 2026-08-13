@@ -35,12 +35,21 @@ describe('nowIso', () => {
     const before = Date.now();
     nowIso();
     await new Promise((resolve) => setTimeout(resolve, 5));
-    const stamp = nowIso();
 
-    // After real time advances, the stamp follows it instead of continuing to
-    // increment from the synthetic counter.
-    expect(new Date(stamp).getTime()).toBeGreaterThanOrEqual(before + 5);
-    expect(new Date(stamp).getTime()).toBeLessThan(before + 5_000);
+    // Read the wall clock we actually observed instead of assuming setTimeout(5)
+    // advanced Date.now() by 5. Node schedules timers off the monotonic clock
+    // while Date.now() reads the wall clock, and NTP slews only the latter — so a
+    // 5ms timer legitimately spans a 4ms wall delta. Measured at 4/3000 runs
+    // (~0.13%), which is what failed this test with no bug in nowIso(): it
+    // asserted against the sleep it requested rather than the time it observed.
+    const wallAfterSleep = Date.now();
+    const stamp = new Date(nowIso()).getTime();
+
+    // The synthetic counter would have reached only `before + 1` by now, so
+    // meeting the observed wall clock is precisely what proves it followed real
+    // time rather than continuing to increment by 1ms.
+    expect(stamp).toBeGreaterThanOrEqual(wallAfterSleep);
+    expect(stamp).toBeLessThan(before + 5_000);
   });
 
   it('resets its internal high-water mark for test isolation', () => {
