@@ -1,0 +1,34 @@
+# Netlify build settings, version-controlled so they are reviewable in a PR
+# rather than living only in the site dashboard.
+#
+# SCOPE CAVEAT: this file configures HOW the site builds. It does not control
+# WHICH Netlify site builds this repo — that link lives in the Netlify dashboard
+# and is set per-site, not per-repo. If deploy previews on this repo are
+# appearing under the wrong site name, this file will not fix it.
+
+[build]
+  # Run from the repo root: the web app imports @lego-tracker/core via a
+  # workspace alias, so building inside apps/web alone would miss the workspace.
+  command = "npm run web:build"
+
+  # Relative to the repo root. `vite build` emits into apps/web/dist.
+  publish = "apps/web/dist"
+
+[build.environment]
+  # Node is pinned in THREE places and they must match:
+  #   - mise.toml               (local dev)
+  #   - .github/workflows/ci.yml (`node-version:` for actions/setup-node)
+  #   - this file               (Netlify builds)
+  # Bump all three together. Target the active LTS line.
+  NODE_VERSION = "24.18.1"
+
+# Deliberately NOT configured here:
+#
+# - VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY / VITE_REBRICKABLE_API_KEY.
+#   These are baked in at build time, so they must be set in the site's
+#   environment variables. They are not committed — a publishable key is still a
+#   value that should be rotatable without a code change.
+#
+# - An SPA fallback redirect (/* -> /index.html). The app has no client-side
+#   router (view state lives in App.tsx), so there are no deep links to rewrite.
+#   Add one when routing is introduced, not before.
