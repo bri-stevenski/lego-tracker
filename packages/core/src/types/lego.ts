@@ -1,4 +1,7 @@
-export type LegoItemType = 'set' | 'minifig';
+// 'part' covers a single element (a specific mould in a specific colour), which
+// is what a Pick-a-Brick export contains. Sets and minifigs are catalogued by
+// set/fig number; a part is catalogued by LEGO element id.
+export type LegoItemType = 'set' | 'minifig' | 'part';
 
 export type AcquisitionQuality =
   | 'new'

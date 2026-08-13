@@ -122,7 +122,7 @@ export async function linkEmailIdentity(email: string): Promise<LinkResult> {
 }
 
 function isValidLegoType(type: any): type is LegoItemType {
-  return type === 'set' || type === 'minifig';
+  return type === 'set' || type === 'minifig' || type === 'part';
 }
 
 function mapRowToItem(data: any): LegoCatalogItem {

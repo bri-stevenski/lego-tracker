@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import {
   CollectionStatus,
+  ImportFormat,
   LegoCatalogItem,
   OwnedLegoItem,
   SetPart,
@@ -20,8 +21,9 @@ import {
   collectionToJSON,
   createOwnedItem,
   downloadBlob,
+  enrichPartItems,
   findByBarcode,
-  parseOmgBricksCSV,
+  parseImportCSV,
   nowIso,
   searchCatalog,
   seedCatalog,
@@ -65,6 +67,14 @@ export function App() {
   const [scanMessage, setScanMessage] = useState('');
   const [isScanningBarcode, setIsScanningBarcode] = useState(false);
   const [importMessage, setImportMessage] = useState('');
+  // A parsed-but-uncommitted import, held while the target list is chosen.
+  const [pendingImport, setPendingImport] = useState<{
+    fileName: string;
+    text: string;
+    format: ImportFormat;
+    count: number;
+  } | null>(null);
+  const [importTarget, setImportTarget] = useState<CollectionStatus>('collection');
   const importInputRef = useRef<HTMLInputElement>(null);
 
   const { sessionReady, backupState, isAnonymous, linkEmail } = useAuth();
@@ -151,6 +161,23 @@ export function App() {
     }
   }
 
+  function applyImported(imported: OwnedLegoItem[]) {
+    setItems((current) => {
+      let next = current;
+      for (const item of imported) {
+        next = upsertOwnedItem(next, item);
+        enqueueMutation({ type: 'upsert', item });
+      }
+      return next;
+    });
+  }
+
+  /**
+   * Step one of an import: read the file and work out what it is, but do not
+   * commit anything. The rows land only after the target list is chosen, since
+   * "things I have" and "things I need" are different answers and the file
+   * itself cannot say which one it is.
+   */
   function handleImportFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -161,25 +188,59 @@ export function App() {
       const text = event.target?.result;
       if (typeof text !== 'string') return;
 
-      const imported = parseOmgBricksCSV(text);
-      if (imported.length === 0) {
+      const { format, items: preview } = parseImportCSV(text);
+      if (!format) {
+        setImportMessage(
+          'Unrecognised CSV. Expected a Pick-a-Brick export (elementId, quantity) or an OMG Bricks collection export.',
+        );
+        return;
+      }
+      if (preview.length === 0) {
         setImportMessage('No items found in file.');
         return;
       }
 
-      setItems((current) => {
-        let next = current;
-        for (const item of imported) {
-          next = upsertOwnedItem(next, item);
-          enqueueMutation({ type: 'upsert', item });
-        }
-        return next;
-      });
-
-      setActiveView('collection');
-      setImportMessage(`Imported ${imported.length} item${imported.length !== 1 ? 's' : ''}.`);
+      setImportMessage('');
+      setPendingImport({ fileName: file.name, text, format, count: preview.length });
     };
     reader.readAsText(file);
+  }
+
+  /** Step two: commit the rows to the chosen list, then fill in part details. */
+  async function confirmImport() {
+    if (!pendingImport) return;
+    const { text } = pendingImport;
+    const target = importTarget;
+    setPendingImport(null);
+
+    const { items: imported } = parseImportCSV(text, { status: target });
+    applyImported(imported);
+    setActiveView(target);
+
+    const noun = imported.length === 1 ? 'item' : 'items';
+    const listName = target === 'wishlist' ? 'wishlist' : 'collection';
+    setImportMessage(`Imported ${imported.length} ${noun} to your ${listName}.`);
+
+    // A Pick-a-Brick file is only element ids, so the rows are unrecognisable
+    // until Rebrickable resolves them. This runs after the import has already
+    // landed: a rate limit or a dead connection degrades the labels, never the
+    // import itself.
+    if (!imported.some((item) => item.type === 'part')) return;
+
+    const enriched = await enrichPartItems(imported, {
+      onProgress: (done, total) => setImportMessage(`Looking up part details… ${done}/${total}`),
+    });
+
+    // Identity comparison: enrichPartItems returns the original object for
+    // anything it could not resolve, so only genuinely updated rows are
+    // re-queued for sync.
+    const changed = enriched.filter((item, i) => item !== imported[i]);
+    if (changed.length > 0) applyImported(changed);
+
+    const named = changed.length === 1 ? 'part' : 'parts';
+    setImportMessage(
+      `Imported ${imported.length} ${noun} to your ${listName}. Identified ${changed.length} ${named}.`,
+    );
   }
 
   function handleToggleMissing(part: SetPart) {
@@ -226,6 +287,45 @@ export function App() {
             onChange={handleImportFile}
           />
         </div>
+        {pendingImport ? (
+          <div className="import-confirm" data-testid="import-confirm">
+            <p className="import-confirm-title">
+              {pendingImport.count} {pendingImport.format === 'pick-a-brick' ? 'part' : 'item'}
+              {pendingImport.count === 1 ? '' : 's'} in <span title={pendingImport.fileName}>{pendingImport.fileName}</span>
+            </p>
+            <fieldset className="import-target">
+              <legend>Add to</legend>
+              <label>
+                <input
+                  type="radio"
+                  name="import-target"
+                  value="collection"
+                  checked={importTarget === 'collection'}
+                  onChange={() => setImportTarget('collection')}
+                />
+                Collection <small>pieces I have</small>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="import-target"
+                  value="wishlist"
+                  checked={importTarget === 'wishlist'}
+                  onChange={() => setImportTarget('wishlist')}
+                />
+                Wishlist <small>pieces I need</small>
+              </label>
+            </fieldset>
+            <div className="import-confirm-actions">
+              <button className="text-button" type="button" onClick={() => setPendingImport(null)}>
+                Cancel
+              </button>
+              <button className="text-button" type="button" onClick={confirmImport}>
+                <Upload size={14} /> Import
+              </button>
+            </div>
+          </div>
+        ) : null}
         {importMessage ? <p className="scan-message">{importMessage}</p> : null}
 
         <SyncStatus

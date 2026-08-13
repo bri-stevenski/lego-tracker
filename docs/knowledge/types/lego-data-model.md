@@ -13,15 +13,15 @@ The Brick Ledger data model is defined in `packages/core/src/types/lego.ts` and 
 
 ### LegoItemType
 
-The `LegoItemType` type distinguishes between `'set'` and `'minifig'` catalog entries. Used by `LegoCatalogItem` and rendered with labels from `itemTypeLabels` in `src/domain/options.ts`.
+The `LegoItemType` type distinguishes between `'set'`, `'minifig'`, and `'part'` catalog entries. Used by `LegoCatalogItem` and rendered with labels from `itemTypeLabels` in `src/domain/options.ts`.
 
 ### LegoCatalogItem
 
 `LegoCatalogItem` is the base interface for all LEGO items in the catalog. It includes:
 
 - `id`: Unique identifier (e.g., `set-10305`, `fig-sw0001c`)
-- `type`: The `LegoItemType` — either `'set'` or `'minifig'`
-- `number`: Set number or minifig number (e.g., `10305`, `sw0001c`)
+- `type`: The `LegoItemType` — `'set'`, `'minifig'`, or `'part'`
+- `number`: Set number, minifig number, or LEGO element id (e.g., `10305`, `sw0001c`, `6206150`)
 - `name`: Display name (e.g., `Lion Knights Castle`)
 - `theme`: Theme name (e.g., `Icons`, `Star Wars`, `Castle`)
 - `year`: Release year

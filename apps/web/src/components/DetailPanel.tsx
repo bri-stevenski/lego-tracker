@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowLeft, BookOpen, Download, Heart, MapPin, Plus } from 'lucide-react';
+import { ItemImage } from './ItemImage';
 import { PartsList } from './PartsList';
 import { MissingPartsList } from './MissingPartsList';
 import { useInstructions } from '../hooks/useInstructions';
@@ -49,7 +50,7 @@ export function DetailPanel({
         </button>
       )}
       <div className="detail-hero">
-        <img src={item.imageUrl} alt={item.name} />
+        <ItemImage src={item.imageUrl} alt={item.name} type={item.type} />
         <div className="detail-heading">
           <div className="kicker">
             {itemTypeLabels[item.type]} {item.number}

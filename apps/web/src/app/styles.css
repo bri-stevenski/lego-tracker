@@ -431,6 +431,57 @@ h1 {
   margin-top: 8px;
 }
 
+/* ─── Import confirmation ─────────────────────────────── */
+
+.import-confirm {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 12px;
+}
+
+.import-confirm-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.import-target {
+  border: 0;
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.import-target legend {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.import-target label {
+  align-items: center;
+  display: flex;
+  font-size: 13px;
+  gap: 8px;
+}
+
+.import-target small {
+  color: var(--color-text-muted);
+}
+
+.import-confirm-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
 /* ─── Tabs ────────────────────────────────────────────── */
 
 .tabs {
@@ -507,12 +558,33 @@ h1 {
   box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-accent);
 }
 
-.item-row img {
+.item-row img,
+.item-row .item-image-fallback {
   background: var(--color-surface-img);
   border-radius: 7px;
   height: 56px;
   object-fit: contain;
   width: 56px;
+}
+
+/*
+ * Placeholder shown when an item has no usable image — an imported part before
+ * enrichment resolves it, or a catalog URL that has rotted. It occupies exactly
+ * the space the image would, so a list of unenriched parts does not reflow as
+ * their photos arrive.
+ */
+.item-image-fallback {
+  align-items: center;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+/* Proportional, so one component serves both the 56px row and the hero panel. */
+.item-image-fallback svg {
+  height: 40%;
+  width: 40%;
 }
 
 .item-row p {
@@ -550,7 +622,8 @@ h1 {
   grid-template-columns: minmax(200px, 340px) minmax(0, 1fr);
 }
 
-.detail-hero > img {
+.detail-hero > img,
+.detail-hero > .item-image-fallback {
   background: var(--color-surface);
   border-radius: 14px;
   box-shadow: var(--shadow-lg);

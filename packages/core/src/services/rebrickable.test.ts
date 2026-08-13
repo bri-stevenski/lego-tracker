@@ -5,6 +5,8 @@ import {
   findRebrickableItem,
   fetchSetInventorySets,
   fetchPartsForInventory,
+  findRebrickableElement,
+  RateLimitError,
 } from './rebrickable';
 import { getConfig } from '../config';
 
@@ -421,6 +423,116 @@ describe('Rebrickable Service', () => {
       const parts = await fetchPartsForInventory('75313-1', null);
       expect(parts).toHaveLength(1);
       expect(mockFetch).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('findRebrickableElement', () => {
+    // Payload shape captured from a live call to
+    // GET /api/v3/lego/elements/6206150/
+    const elementPayload = {
+      element_id: '6206150',
+      part: {
+        part_num: '24866',
+        name: 'Plant, Flower, Plate Round 1 x 1 with 5 Petals',
+        part_img_url: 'https://cdn.rebrickable.com/media/parts/elements/6206150.jpg',
+      },
+      color: { name: 'Bright Green' },
+    };
+
+    it('resolves an element id to its part, colour and image', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true, status: 200, headers: { get: () => null },
+        json: async () => elementPayload,
+      });
+
+      const info = await findRebrickableElement('6206150');
+
+      expect(info).toEqual({
+        elementId: '6206150',
+        partNum: '24866',
+        name: 'Plant, Flower, Plate Round 1 x 1 with 5 Petals',
+        colorName: 'Bright Green',
+        imageUrl: 'https://cdn.rebrickable.com/media/parts/elements/6206150.jpg',
+      });
+      expect(mockFetch).toHaveBeenCalledWith(expect.stringContaining('/elements/6206150/'));
+    });
+
+    it('trims surrounding whitespace from the id', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true, status: 200, headers: { get: () => null },
+        json: async () => elementPayload,
+      });
+
+      await findRebrickableElement('  6206150 ');
+
+      expect(mockFetch).toHaveBeenCalledWith(expect.stringContaining('/elements/6206150/'));
+    });
+
+    it.each([
+      ['path traversal', '../sets/10305-1'],
+      ['a slash', '6206150/foo'],
+      ['a query separator', '6206150?key=leaked'],
+      ['empty', ''],
+      ['over-long input', '1'.repeat(21)],
+    ])('rejects %s without issuing a request', async (_label, id) => {
+      // The id is interpolated into the request path, so anything that is not a
+      // plain element id must be refused before it can reshape the URL.
+      const info = await findRebrickableElement(id);
+
+      expect(info).toBeNull();
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    it('returns null when the element is not catalogued', async () => {
+      mockFetch.mockResolvedValueOnce({ ok: false, status: 404, headers: { get: () => null } });
+
+      expect(await findRebrickableElement('9999999')).toBeNull();
+    });
+
+    it('returns null when the payload carries no part', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true, status: 200, headers: { get: () => null },
+        json: async () => ({ element_id: '6206150' }),
+      });
+
+      expect(await findRebrickableElement('6206150')).toBeNull();
+    });
+
+    it('tolerates a missing colour rather than throwing', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true, status: 200, headers: { get: () => null },
+        json: async () => ({ ...elementPayload, color: undefined }),
+      });
+
+      const info = await findRebrickableElement('6206150');
+
+      expect(info?.colorName).toBe('');
+      expect(info?.name).toBe('Plant, Flower, Plate Round 1 x 1 with 5 Petals');
+    });
+
+    it('reports an absent image as empty, not as a placeholder URL', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true, status: 200, headers: { get: () => null },
+        json: async () => ({ ...elementPayload, part: { ...elementPayload.part, part_img_url: null } }),
+      });
+
+      expect((await findRebrickableElement('6206150'))?.imageUrl).toBe('');
+    });
+
+    it('returns null when no API key is configured', async () => {
+      (getConfig as any).mockReturnValue({});
+
+      expect(await findRebrickableElement('6206150')).toBeNull();
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    it('propagates a rate limit so the caller can degrade deliberately', async () => {
+      mockFetch.mockResolvedValueOnce({
+        status: 429, ok: false,
+        headers: { get: (k: string) => (k === 'Retry-After' ? '30' : null) },
+      });
+
+      await expect(findRebrickableElement('6206150')).rejects.toThrow(RateLimitError);
     });
   });
 });

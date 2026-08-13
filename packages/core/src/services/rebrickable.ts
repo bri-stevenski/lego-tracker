@@ -69,7 +69,10 @@ function mapToCatalogItem(item: RebrickableItem, type: LegoItemType): LegoCatalo
     pieceCount: item.num_parts || 0,
     retired: false,
     estimatedValue: 0,
-    imageUrl: item.set_img_url || 'https://via.placeholder.com/150?text=No+Image',
+    // Empty, not a placeholder URL. This used to point at via.placeholder.com,
+    // a service that no longer resolves, so the "fallback" rendered as a broken
+    // image. Absence is signalled to the UI, which owns the placeholder.
+    imageUrl: item.set_img_url || '',
   };
 }
 
@@ -138,6 +141,47 @@ export async function findRebrickableItem(number: string, type: LegoItemType): P
     if (error instanceof RateLimitError) throw error;
     return null;
   }
+}
+
+/** What a Pick-a-Brick element id resolves to. */
+export interface RebrickableElementInfo {
+  elementId: string;
+  partNum: string;
+  name: string;
+  colorName: string;
+  imageUrl: string;
+}
+
+interface RebrickableElementResponse {
+  element_id?: string;
+  part?: { part_num: string; name: string; part_img_url: string | null };
+  color?: { name: string };
+}
+
+/**
+ * Resolve a LEGO element id (a mould in a specific colour) to its part name,
+ * colour, and image.
+ *
+ * A Pick-a-Brick export contains nothing but element ids, so this is the only
+ * way an imported part becomes recognisable. Returns null when the element is
+ * unknown, which is expected: not every element LEGO sells is catalogued.
+ */
+export async function findRebrickableElement(elementId: string): Promise<RebrickableElementInfo | null> {
+  const cleaned = elementId.trim();
+  // The id is interpolated into the request path, so it is constrained to the
+  // shape a real element id has rather than escaped after the fact.
+  if (!/^[0-9a-zA-Z]{1,20}$/.test(cleaned)) return null;
+
+  const data = await fetchFromRebrickable<RebrickableElementResponse>(`/elements/${cleaned}/`, {});
+  if (!data?.part) return null;
+
+  return {
+    elementId: data.element_id ?? cleaned,
+    partNum: data.part.part_num,
+    name: data.part.name,
+    colorName: data.color?.name ?? '',
+    imageUrl: data.part.part_img_url ?? '',
+  };
 }
 
 interface RebrickablePartEntry {

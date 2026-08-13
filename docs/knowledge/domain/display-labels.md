@@ -11,7 +11,7 @@ The options module in `packages/core/src/domain/options.ts` maps enum types to h
 
 ## itemTypeLabels
 
-`itemTypeLabels` maps `LegoItemType` to display strings: `'set'` → `'Set'`, `'minifig'` → `'Minifig'`. Used in `ItemList` and `DetailPanel` in `apps/web/src/app/App.tsx`.
+`itemTypeLabels` maps `LegoItemType` to display strings: `'set'` → `'Set'`, `'minifig'` → `'Minifig'`, `'part'` → `'Part'`. Used in `ItemList` and `DetailPanel` in `apps/web/src/app/App.tsx`.
 
 ## statusLabels
 
