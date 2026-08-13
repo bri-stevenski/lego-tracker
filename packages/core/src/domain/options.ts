@@ -3,6 +3,7 @@ import type { AcquisitionQuality, BuildStatus, CollectionStatus, LegoItemType } 
 export const itemTypeLabels: Record<LegoItemType, string> = {
   set: 'Set',
   minifig: 'Minifig',
+  part: 'Part',
 };
 
 export const statusLabels: Record<CollectionStatus, string> = {

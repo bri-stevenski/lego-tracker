@@ -1,5 +1,6 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
+import { ItemImage } from './ItemImage';
 import { CollectionStatus, LegoCatalogItem, OwnedLegoItem, itemTypeLabels } from '@lego-tracker/core';
 
 // Distinct parts, not summed quantity: the badge has to agree with the list it
@@ -40,7 +41,7 @@ export function ItemList({
           tabIndex={0}
           onKeyDown={(e) => { if (e.key === 'Enter') onSelect(item.id); }}
         >
-          <img src={item.imageUrl} alt="" />
+          <ItemImage src={item.imageUrl} alt="" type={item.type} />
           <div>
             <div className="item-title-line">
               <strong>{item.number}</strong>
