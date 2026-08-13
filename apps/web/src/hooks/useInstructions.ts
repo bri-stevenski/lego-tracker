@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { type LegoCatalogItem, type InstructionBooklet, fetchInstructionBooklets } from '@lego-tracker/core';
+import { type LegoCatalogItem, type InstructionBooklet, fetchInstructionBooklets } from '@anti-kragle/core';
 
 export function useInstructions(item: LegoCatalogItem | undefined): {
   booklets: InstructionBooklet[];

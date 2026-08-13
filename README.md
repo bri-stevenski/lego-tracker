@@ -1,6 +1,6 @@
-# Brick Ledger
+# Anti-Kragle
 
-Brick Ledger is a local-first LEGO collection tracker for web, designed so the same domain model can later power an iOS app. It lets you search the Rebrickable catalog (27k+ sets), add sets or minifigs to your collection or wishlist, scan barcodes, view per-bag parts lists with CSV/BSX export, download building instructions, and track missing parts with structured export.
+Anti-Kragle is a local-first LEGO collection tracker for web, designed so the same domain model can later power an iOS app. It lets you search the Rebrickable catalog (27k+ sets), add sets or minifigs to your collection or wishlist, scan barcodes, view per-bag parts lists with CSV/BSX export, download building instructions, and track missing parts with structured export.
 
 ## Current Status
 
@@ -24,8 +24,8 @@ M1–M6 complete. Cloud sync via Supabase is live — collection data persists a
 Prerequisites: Node.js 24+ (CI pins 24.18.1; `mise install` matches it), npm, a [Supabase](https://supabase.com) project, a [Rebrickable API key](https://rebrickable.com/api/).
 
 ```bash
-git clone https://github.com/ahhrealmonstr/lego-tracker.git
-cd lego-tracker
+git clone https://github.com/ahhrealmonstr/anti-kragle.git
+cd anti-kragle
 npm install
 cp .env.example .env   # fill in VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY, VITE_REBRICKABLE_API_KEY
 npm run web:dev

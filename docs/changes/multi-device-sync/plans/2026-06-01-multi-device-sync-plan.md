@@ -871,7 +871,7 @@ Create `apps/web/src/services/syncQueue.test.ts`:
 ```typescript
 import { describe, it, expect, beforeEach } from 'vitest';
 import { loadSyncQueue, saveSyncQueue, enqueueMutation, clearSyncQueue } from './syncQueue';
-import type { SyncQueueEntry, OwnedLegoItem } from '@lego-tracker/core';
+import type { SyncQueueEntry, OwnedLegoItem } from '@anti-kragle/core';
 
 const QUEUE_KEY = 'brick-ledger.sync-queue.v1';
 
@@ -965,7 +965,7 @@ Expected: FAIL — `Cannot find module './syncQueue'`
 Create `apps/web/src/services/syncQueue.ts`:
 
 ```typescript
-import type { SyncQueueEntry } from '@lego-tracker/core';
+import type { SyncQueueEntry } from '@anti-kragle/core';
 
 const QUEUE_KEY = 'brick-ledger.sync-queue.v1';
 
@@ -1036,7 +1036,7 @@ No unit tests — this function composes already-tested pieces and is covered at
 - [ ] **Step 1: Create `apps/web/src/services/reconcile.ts`**
 
 ```typescript
-import { loadCollectionFromCloud, reconcileCollection, syncCollectionToCloud } from '@lego-tracker/core';
+import { loadCollectionFromCloud, reconcileCollection, syncCollectionToCloud } from '@anti-kragle/core';
 import { loadCollection, saveCollection } from './storage';
 import { clearSyncQueue, loadSyncQueue } from './syncQueue';
 
@@ -1081,7 +1081,7 @@ git commit -m "feat(web): add reconcile orchestration (pull→merge→push)"
 
 ```typescript
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { SyncStatus } from '@lego-tracker/core';
+import type { SyncStatus } from '@anti-kragle/core';
 import { reconcile } from '../services/reconcile';
 
 const SYNC_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
@@ -1170,7 +1170,7 @@ git commit -m "feat(web): add useSync hook with interval and online/offline hand
 ```tsx
 import React from 'react';
 import { Cloud, CloudOff, RefreshCw, WifiOff } from 'lucide-react';
-import type { SyncStatus } from '@lego-tracker/core';
+import type { SyncStatus } from '@anti-kragle/core';
 
 interface Props {
   status: SyncStatus;
@@ -1265,7 +1265,7 @@ import {
   setConfig,
   summarizeCollection,
   upsertOwnedItem,
-} from '@lego-tracker/core';
+} from '@anti-kragle/core';
 import { loadCollection, saveCollection } from '../services/storage';
 import { enqueueMutation } from '../services/syncQueue';
 import { BarcodeScanner } from '../components/BarcodeScanner';
@@ -1378,7 +1378,7 @@ export function App() {
             <Box size={24} />
           </div>
           <div>
-            <h1>Brick Ledger</h1>
+            <h1>Anti-Kragle</h1>
             <p>Collection tracker</p>
           </div>
         </div>

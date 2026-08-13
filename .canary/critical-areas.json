@@ -209,7 +209,7 @@
         "raw_total": 0.308
       },
       "recommended_test_types": ["component", "e2e"],
-      "summary": "Entire mobile platform has zero tests. M7 is the iOS milestone — any work starting there lands with no safety net. Imports from @lego-tracker/core so core regressions also surface silently here."
+      "summary": "Entire mobile platform has zero tests. M7 is the iOS milestone — any work starting there lands with no safety net. Imports from @anti-kragle/core so core regressions also surface silently here."
     }
   ]
 }

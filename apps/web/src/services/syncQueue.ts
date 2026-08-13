@@ -1,4 +1,4 @@
-import type { SyncQueueEntry } from '@lego-tracker/core';
+import type { SyncQueueEntry } from '@anti-kragle/core';
 
 export const QUEUE_KEY = 'brick-ledger.sync-queue.v1';
 

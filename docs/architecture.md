@@ -1,6 +1,6 @@
 # Architecture
 
-Brick Ledger is a local-first web app with a shared domain model designed to be reused by a future iOS client.
+Anti-Kragle is a local-first web app with a shared domain model designed to be reused by a future iOS client.
 
 ## Goals
 
@@ -97,7 +97,7 @@ Auth and session responsibility live in the **core services layer** — `package
 | `getSessionSnapshot()` | Synchronous read of the module-level session cache (`{ userId, isAnonymous }`) — lets the hook layer reflect state without importing the client. |
 | `onSessionChange(cb)` | Subscribes to auth-state changes (used to reflect a magic-link return) and returns an unsubscribe function. |
 
-These are the **only** auth surface the web app may touch, and it reaches them exclusively through the core public barrel (`@lego-tracker/core`) via the `apps/web/src/hooks/useAuth.ts` hook — never through a deep import. This is the RR-010 boundary in practice.
+These are the **only** auth surface the web app may touch, and it reaches them exclusively through the core public barrel (`@anti-kragle/core`) via the `apps/web/src/hooks/useAuth.ts` hook — never through a deep import. This is the RR-010 boundary in practice.
 
 ### Anonymous-backup + account-linking model
 

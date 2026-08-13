@@ -71,7 +71,7 @@ All notable changes to this project will be documented in this file.
 ### Added (M1 — Foundation)
 
 - Vite + React web app (`apps/web`)
-- `@lego-tracker/core` shared domain package
+- `@anti-kragle/core` shared domain package
 - Supabase-backed collection storage with RLS
 - JSON/CSV collection export
 - Harness engineering setup, Oracle test personas

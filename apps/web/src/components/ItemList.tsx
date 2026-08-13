@@ -1,7 +1,7 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
 import { ItemImage } from './ItemImage';
-import { CollectionStatus, LegoCatalogItem, OwnedLegoItem, itemTypeLabels } from '@lego-tracker/core';
+import { CollectionStatus, LegoCatalogItem, OwnedLegoItem, itemTypeLabels } from '@anti-kragle/core';
 
 // Distinct parts, not summed quantity: the badge has to agree with the list it
 // sends you to, and a reorder is a set of elements rather than a piece count.

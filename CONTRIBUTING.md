@@ -3,8 +3,8 @@
 ## Development Setup
 
 ```bash
-git clone https://github.com/ahhrealmonstr/lego-tracker.git
-cd lego-tracker
+git clone https://github.com/ahhrealmonstr/anti-kragle.git
+cd anti-kragle
 npm install
 cp .env.example .env   # fill in VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY, VITE_REBRICKABLE_API_KEY
 npm run web:dev

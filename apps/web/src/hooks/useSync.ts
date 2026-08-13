@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { SyncStatus } from '@lego-tracker/core';
+import type { SyncStatus } from '@anti-kragle/core';
 import { reconcile } from '../services/reconcile';
 
 const SYNC_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes

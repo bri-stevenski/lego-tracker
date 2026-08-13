@@ -4,7 +4,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 module.exports = {
   expo: {
-    name: 'Brick Ledger',
+    name: 'Anti-Kragle',
     slug: 'brick-ledger',
     version: '1.0.0',
     orientation: 'portrait',
@@ -32,7 +32,7 @@ module.exports = {
       package: 'com.brickledger.app',
     },
     plugins: [
-      ['expo-camera', { cameraPermission: 'Allow Brick Ledger to scan LEGO set barcodes.' }],
+      ['expo-camera', { cameraPermission: 'Allow Anti-Kragle to scan LEGO set barcodes.' }],
     ],
     extra: {
       rebrickableApiKey: process.env.VITE_REBRICKABLE_API_KEY ?? '',

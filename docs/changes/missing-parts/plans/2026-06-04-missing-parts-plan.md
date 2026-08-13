@@ -253,7 +253,7 @@ Create `apps/web/src/components/MissingPartsList.tsx`:
 ```tsx
 import React from 'react';
 import { Trash2 } from 'lucide-react';
-import { type MissingSetPart, partsToCSV, partsToBSX, downloadBlob } from '@lego-tracker/core';
+import { type MissingSetPart, partsToCSV, partsToBSX, downloadBlob } from '@anti-kragle/core';
 
 export function MissingPartsList({
   parts,
@@ -427,7 +427,7 @@ Add import at top:
 
 ```ts
 import { MissingPartsList } from './MissingPartsList';
-import type { SetPart } from '@lego-tracker/core';
+import type { SetPart } from '@anti-kragle/core';
 ```
 
 Replace the PartsList render:
@@ -453,7 +453,7 @@ Replace the PartsList render:
 
 - [ ] **Step 5: Update App.tsx to pass onToggleMissing**
 
-In `App.tsx`, import `toggleMissingPart` from `@lego-tracker/core`.
+In `App.tsx`, import `toggleMissingPart` from `@anti-kragle/core`.
 
 Add a handler inside `App`:
 

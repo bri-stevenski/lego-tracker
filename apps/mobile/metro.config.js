@@ -6,7 +6,7 @@ const workspaceRoot = path.resolve(projectRoot, '../..');
 
 const config = getDefaultConfig(projectRoot);
 
-// Watch all workspace packages so Metro sees changes in @lego-tracker/core
+// Watch all workspace packages so Metro sees changes in @anti-kragle/core
 config.watchFolders = [...(config.watchFolders ?? []), workspaceRoot];
 
 // Resolve modules from both the app and the workspace root

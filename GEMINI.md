@@ -1,4 +1,4 @@
-# Project Instructions: Brick Ledger
+# Project Instructions: Anti-Kragle
 
 These instructions are foundational mandates for all AI agents working in this repository.
 

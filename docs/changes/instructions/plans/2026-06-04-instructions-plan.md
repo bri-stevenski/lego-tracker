@@ -240,7 +240,7 @@ Deno.serve(async (req) => {
 
   try {
     const res = await fetch(legoUrl, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; BrickLedger/1.0)' },
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AntiKragle/1.0)' },
     });
 
     if (res.ok) {
@@ -292,7 +292,7 @@ Create `apps/web/src/hooks/useInstructions.ts`:
 
 ```ts
 import { useState, useEffect } from 'react';
-import { type LegoCatalogItem, type InstructionBooklet, fetchInstructionBooklets } from '@lego-tracker/core';
+import { type LegoCatalogItem, type InstructionBooklet, fetchInstructionBooklets } from '@anti-kragle/core';
 
 export function useInstructions(item: LegoCatalogItem | undefined): {
   booklets: InstructionBooklet[];

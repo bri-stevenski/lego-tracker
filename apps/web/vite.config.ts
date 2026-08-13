@@ -7,7 +7,7 @@ export default defineConfig({
   envDir: '../../',
   resolve: {
     alias: {
-      '@lego-tracker/core': path.resolve(__dirname, '../../packages/core/src/index.ts'),
+      '@anti-kragle/core': path.resolve(__dirname, '../../packages/core/src/index.ts'),
     },
   },
   test: {

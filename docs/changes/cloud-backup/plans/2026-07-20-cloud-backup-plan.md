@@ -371,8 +371,8 @@ _Infra for SC 1(web), 5, 7, 8._
 
    ```ts
    import { useEffect, useRef, useState } from 'react';
-   import { ensureAnonymousSession, getSessionSnapshot, linkEmailIdentity } from '@lego-tracker/core';
-   import type { LinkResult } from '@lego-tracker/core';
+   import { ensureAnonymousSession, getSessionSnapshot, linkEmailIdentity } from '@anti-kragle/core';
+   import type { LinkResult } from '@anti-kragle/core';
 
    export type BackupState = 'initializing' | 'backed-up' | 'backing-up' | 'offline' | 'error';
 
@@ -416,12 +416,12 @@ _Infra for SC 1(web), 5, 7, 8._
    ```tsx
    import { describe, it, expect, vi, beforeEach } from 'vitest';
    import { renderHook, waitFor } from '@testing-library/react';
-   vi.mock('@lego-tracker/core', () => ({
+   vi.mock('@anti-kragle/core', () => ({
      ensureAnonymousSession: vi.fn(),
      getSessionSnapshot: vi.fn(),
      linkEmailIdentity: vi.fn(),
    }));
-   import { ensureAnonymousSession, getSessionSnapshot } from '@lego-tracker/core';
+   import { ensureAnonymousSession, getSessionSnapshot } from '@anti-kragle/core';
    import { useAuth } from './useAuth';
 
    beforeEach(() => vi.clearAllMocks());
@@ -526,7 +526,7 @@ unreachable, confirm the app stays usable local-only (SC 9).
    }
    ```
 
-2. Create `apps/web/src/services/reconcile.test.ts` (mock `@lego-tracker/core`, `./storage`,
+2. Create `apps/web/src/services/reconcile.test.ts` (mock `@anti-kragle/core`, `./storage`,
    `./syncQueue`): make `loadCollectionFromCloud` return a promise resolved on a controllable
    deferred; call `reconcile()` twice concurrently; assert `loadCollectionFromCloud` (the
    `doReconcile` entry) invoked **exactly once** and both callers resolve. Add a follow-up test: a
@@ -739,7 +739,7 @@ _Gates SC 11._
 ## Risks
 
 - **R1 — RR-010 regression.** Web must import wrappers only via the core barrel + `useAuth`. Enforced
-  by Task 6's barrel guard test and Tasks 8/15 mocking `@lego-tracker/core`. Do **not** deepen
+  by Task 6's barrel guard test and Tasks 8/15 mocking `@anti-kragle/core`. Do **not** deepen
   `catalog.ts`'s existing violation.
 - **R2 — Singleton leaks across core tests.** Mitigated by `__resetSupabaseClientForTests()` in
   `beforeEach` and config-null short-circuit before cache use (Task 2).

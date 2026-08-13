@@ -1,5 +1,5 @@
 ---
-project: lego-tracker
+project: anti-kragle
 version: 1.1.0
 last_synced: 2026-08-01 (restored + reconciled against STRATEGY.md)
 last_manual_edit: 2026-08-01
@@ -7,7 +7,7 @@ status: in-progress
 strategy: STRATEGY.md
 ---
 
-# Brick Ledger Roadmap
+# Anti-Kragle Roadmap
 
 Every initiative below carries a **Track** that maps it to one of the five tracks in
 [`STRATEGY.md`](../STRATEGY.md). If an initiative does not map to a track, it does not

@@ -1,6 +1,6 @@
 # User Guide
 
-Brick Ledger tracks LEGO sets and minifigs across a collection and wishlist. Collection data syncs to Supabase so it's available across devices.
+Anti-Kragle tracks LEGO sets and minifigs across a collection and wishlist. Collection data syncs to Supabase so it's available across devices.
 
 ## Main Screen
 

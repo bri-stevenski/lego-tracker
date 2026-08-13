@@ -8,7 +8,7 @@
     "ios": "expo start --ios"
   },
   "dependencies": {
-    "@lego-tracker/core": "^0.1.0",
+    "@anti-kragle/core": "^0.1.0",
     "expo": "~54.0.35",
     "expo-camera": "~17.0.10",
     "expo-constants": "~18.0.13",

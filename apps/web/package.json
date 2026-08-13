@@ -1,5 +1,5 @@
 {
-  "name": "@lego-tracker/web",
+  "name": "@anti-kragle/web",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@lego-tracker/core": "*",
+    "@anti-kragle/core": "*",
     "@supabase/supabase-js": "^2.105.1",
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",

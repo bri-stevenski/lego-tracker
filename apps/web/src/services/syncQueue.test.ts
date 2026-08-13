@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { loadSyncQueue, saveSyncQueue, enqueueMutation, clearSyncQueue, removeSyncedEntries } from './syncQueue';
-import type { SyncQueueEntry, OwnedLegoItem } from '@lego-tracker/core';
+import type { SyncQueueEntry, OwnedLegoItem } from '@anti-kragle/core';
 
 const QUEUE_KEY = 'brick-ledger.sync-queue.v1';
 

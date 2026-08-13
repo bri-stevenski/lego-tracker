@@ -898,7 +898,7 @@ No test infrastructure for hooks in web app — covered by domain-level tests ab
 ```ts
 // apps/web/src/hooks/useSetParts.ts
 import { useState, useEffect } from 'react';
-import { type LegoCatalogItem, type SetPart, getOrFetchSetParts } from '@lego-tracker/core';
+import { type LegoCatalogItem, type SetPart, getOrFetchSetParts } from '@anti-kragle/core';
 
 export function useSetParts(item: LegoCatalogItem | undefined): {
   parts: SetPart[];
@@ -972,7 +972,7 @@ git commit -m "feat(web): add useSetParts hook"
 ```tsx
 // apps/web/src/components/PartsList.tsx
 import React from 'react';
-import { type LegoCatalogItem, type SetPart } from '@lego-tracker/core';
+import { type LegoCatalogItem, type SetPart } from '@anti-kragle/core';
 import { useSetParts } from '../hooks/useSetParts';
 
 export function PartsList({ item }: { item: LegoCatalogItem }) {

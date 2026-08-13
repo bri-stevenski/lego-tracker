@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "types": ["vite/client"],
     "paths": {
-      "@lego-tracker/core": ["../../packages/core/src/index.ts"]
+      "@anti-kragle/core": ["../../packages/core/src/index.ts"]
     }
   },
   "include": ["src"],

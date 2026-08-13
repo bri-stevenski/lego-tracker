@@ -7,7 +7,7 @@ related: [lego.ts, domain/catalog.ts]
 
 # Lego Data Model
 
-The Brick Ledger data model is defined in `packages/core/src/types/lego.ts` and shared across all layers.
+The Anti-Kragle data model is defined in `packages/core/src/types/lego.ts` and shared across all layers.
 
 ## Core Types
 

@@ -4,8 +4,8 @@ import {
   getSessionSnapshot,
   linkEmailIdentity,
   onSessionChange,
-} from '@lego-tracker/core';
-import type { LinkResult } from '@lego-tracker/core';
+} from '@anti-kragle/core';
+import type { LinkResult } from '@anti-kragle/core';
 
 export type BackupState = 'initializing' | 'backed-up' | 'backing-up' | 'offline' | 'error';
 
